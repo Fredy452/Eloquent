@@ -9,4 +9,12 @@ class Level extends Model
   public function users(){
     return $this->hasMany(User::class);
   }
+
+  public function posts(){
+    return $this->hasManyThrough(Post::class, User::class);//Un nivel tiene una relacion de muchos posts a traves de usuario;
+  }
+
+  public function videos(){
+    return $this->hasManyThrough(Video::class, User::class);//Un nivel tiene una relacion de muchos videos a traves de usuario;
+  }
 }
