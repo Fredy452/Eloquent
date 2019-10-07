@@ -39,6 +39,18 @@ class User extends Authenticatable
     //Relacion del usuario con el perfil
     //Un usuario solo puede tener un perfil
     public function profile(){//El metodo profile es en singular ya que un usuario va a tener un solo perfil
-      return $this->hasOne(Profile::class);
+      return $this->hasOne(Profile::class);//un usuario tiene un perfil
+    }
+
+    public function level(){
+      return $this->belongsTo(Level::class);//Un nivel pertenece a un usuario
+    }
+
+    public function groups(){//Es en singular porque es mucho amucho
+      return $this->belongsToMany(Group::class)->withTimestamps();//Un usuario pertenece a un grupo y a la ves tiene muchos grupos
+    }
+
+    public function location(){
+      return $this->hasOneThrough(Location::class, Profile::class);//Tengo una localizacion a traves de perfil
     }
 }

@@ -1,4 +1,5 @@
 <?php
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,5 +13,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $users = App\User::get();//consulta para obtener el usuario de la base de datos
+
+    return view('welcome', ['users' => $users]);
 });
