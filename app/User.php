@@ -47,7 +47,7 @@ class User extends Authenticatable
     }
 
     public function groups(){//Es en singular porque es mucho amucho
-      return $this->belongsToMany(Group::class)->withTimestamps();//Un usuario pertenece a un grupo y a la ves tiene muchos grupos
+      return $this->belongsToMany(Group::class);//Un usuario pertenece a un grupo y a la ves tiene muchos grupos
     }
 
     public function location(){
