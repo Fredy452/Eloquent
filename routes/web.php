@@ -24,8 +24,39 @@ Route::get('/', function () {
 
       $user = App\User::find($id);//Buscamos al usuario que recibimos por parametro
 
+      $posts = $user->posts()
+        ->with('category', 'image', 'tags')
+        ->withCount('comments')->get();//para contar comentarios
+
+      $videos = $user->videos()
+        ->with('category', 'image', 'tags')
+        ->withCount('comments')->get();
+
     return view('profile', [
-      'user' => $user
+      'user' => $user,
+      'posts' => $posts,
+      'videos' => $videos
     ]);
 
     })->name('profile');
+
+    //Route level
+        Route::get('/level/{id}', function($id) {//patch de profile y el id que recibe por parametro un idea
+
+          $level = App\Level::find($id);//Buscamos al usuario que recibimos por parametro
+
+          $posts = $level->posts()
+            ->with('category', 'image', 'tags')
+            ->withCount('comments')->get();//para contar comentarios
+
+          $videos = $level->videos()
+            ->with('category', 'image', 'tags')
+            ->withCount('comments')->get();
+
+        return view('level', [
+          'level' => $level,
+          'posts' => $posts,
+          'videos' => $videos
+        ]);
+
+      })->name('level');
