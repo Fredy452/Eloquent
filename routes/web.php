@@ -18,3 +18,14 @@ Route::get('/', function () {
 
     return view('welcome', ['users' => $users]);
 });
+
+//Route profile
+    Route::get('/profile/{id}', function($id) {//patch de profile y el id que recibe por parametro un idea
+
+      $user = App\User::find($id);//Buscamos al usuario que recibimos por parametro
+
+    return view('profile', [
+      'user' => $user
+    ]);
+
+    })->name('profile');
